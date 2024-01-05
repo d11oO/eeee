@@ -56,12 +56,21 @@
         end
     end
 
+    function NightTimeCycle()
+        while _G.NTC do
+            for i = 1, 24 do
+                lighting.ClockTime = i / 100
+                wait(0.1)
+            end
+        end
+
     
 
     -- Values
 
     _G.autotap = true
     _G.autoRebirth = true
+    _G.NTC = true
 
     -- Toggles
 
@@ -70,7 +79,8 @@
         Name = "NightTime",
         Default = false,
         Callback = function(Value)
-            game.lighting.ClockTime = 1
+            _G.NTC = Value
+            NightTimeCycle()
         end    
     })
 
