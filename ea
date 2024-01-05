@@ -1,5 +1,4 @@
-
-    local OrionLib = loadstring(game:HttpGet(("https://raw.githubusercontent.com/shlexware/Orion/main/source")))()
+ local OrionLib = loadstring(game:HttpGet(("https://raw.githubusercontent.com/shlexware/Orion/main/source")))()
     local Window =
         OrionLib:MakeWindow(
         {
@@ -76,7 +75,7 @@
 
 
     VisTab:AddToggle({
-        Name = "NightTime",
+        Name = "NightTimeCycle",
         Default = false,
         Callback = function(Value)
             _G.NTC = Value
