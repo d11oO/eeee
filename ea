@@ -1,11 +1,101 @@
-VisTab:AddSlider({
-    Name = "Time Changer",
-    Min = 0,
-    Max = 23,
-    Default = 0,
-    Color = Color3.fromRGB(255, 255, 255),
-    Increment = 1,
-    ValueName = "Times",
-    Callback = function(Value)
-        light.ClockTime = Value
-    end 
+
+    local OrionLib = loadstring(game:HttpGet(("https://raw.githubusercontent.com/shlexware/Orion/main/source")))()
+    local Window =
+        OrionLib:MakeWindow(
+        {
+            Name = "Extral0",
+            HidePremium = false,
+            SaveConfig = false,
+            ConfigFolder = "OrionTest",
+            IntroText = "Extral0"
+        }
+    )
+
+    function notify(message, title, time)
+        OrionLib:MakeNotification(
+            {
+                Name = tostring(title),
+                Content = tostring(message),
+                Image = "rbxassetid://4483345998",
+                Time = tonumber(time)
+            }
+        )
+    end
+
+    local MainTab =
+        Window:MakeTab(
+        {
+            Name = "Auto",
+            Icon = "rbxassetid://4483345998",
+            PremiumOnly = false
+        }
+    )
+
+    local VisTab =
+    Window:MakeTab(
+    {
+        Name = "Visuals",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
+    }
+)
+
+    -- Script (function)
+
+    function autotap()
+        while _G.autotap do
+            game:GetService("ReplicatedStorage"):WaitForChild("common"):WaitForChild("packages"):WaitForChild("_Index"):WaitForChild("sleitnick_knit@1.5.1"):WaitForChild("knit"):WaitForChild("Services"):WaitForChild("ClickService"):WaitForChild("RE"):WaitForChild("Click"):FireServer()
+            wait(0.000000001)
+        end
+    end
+
+    function autoRebirth()
+        while _G.autoRebirth do
+            game:GetService("ReplicatedStorage"):WaitForChild("common"):WaitForChild("packages"):WaitForChild("_Index"):WaitForChild("sleitnick_knit@1.5.1"):WaitForChild("knit"):WaitForChild("Services"):WaitForChild("RebirthService"):WaitForChild("RE"):WaitForChild("Rebirth"):FireServer()
+            wait (1)
+        end
+    end
+
+    
+
+    -- Values
+
+    _G.autotap = true
+    _G.autoRebirth = true
+
+    -- Toggles
+
+
+    VisTab:AddSlider({
+        Name = "Time Changer",
+        Min = 0,
+        Max = 23,
+        Default = 0,
+        Color = Color3.fromRGB(255,255,255),
+        Increment = 1,
+        ValueName = "Times",
+        Callback = function(Value)
+            light.ClockTime = Value
+        end    
+    })
+
+    MainTab:AddToggle({
+        Name = "Auto Click",
+        Default = false,
+        Callback = function(Value)
+            _G.autotap = Value
+            autotap()
+        end
+    })
+
+    MainTab:AddToggle({
+        Name = "Auto Rebirth",
+        Default = false,
+        Callback = function(Value)
+            _G.autoRebirth = Value
+            autoRebirth()
+        end
+    })
+
+
+
