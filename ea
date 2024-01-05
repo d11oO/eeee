@@ -1,75 +1,107 @@
-if game.Placeid == 10764017846 then
-    local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-    OrionLib:MakeNotification({
-        Name = "Thanks!",
-        Content = "Thank You For Using This Script:D",
-        Image = "rbxassetid://4483345998",
-        Time = 3
-    })
-    local Window = OrionLib:MakeWindow({Name = "Eternal Craftwars Script By d11oO", HidePremium = false, SaveConfig = false, ConfigFolder = "EternalCraftWars"})
-    local KillingTab = Window:MakeTab({
-        Name = "Killing Tab",
-        Icon = "rbxassetid://4483345998",
-        PremiumOnly = false
-        IntroText = "Eternal Shitter || Eternal CraftWars Script"
-    })
-    KillingTab:AddParagraph('Note!', 'Make sure to have the item "Sword" in your backpack and any pickaxe.')
-    function kill(enemy)
-        if enemy:FindFirstChild("EnemyMain") then
-        humanoid:UnequipTools()
-        
-        for i, v in bp:GetChildren() do
-            if v.Name:lower():find("sword") and v:FindFirstChild("RemoteFunction") then
-                v.Parent = c
-                sword = v
-            end
-        end
-        rp.CFrame = enemy:FindFirstChildWhichIsA("Part").CFrame + Vector3.new(0, 25, 0)
-        local args = {
-            [1] = "hit",
-            [2] = {
-                [1] = enemy.Humanoid,
-                [2] = enemy.Humanoid.Health
-            }
-        }
-    
-       if sword then sword.RemoteFunction:InvokeServer(unpack(args))
-       end
-      end
-    end
-    KillingTab:AddToggle({
-        Name = 'Auto kill mobs',
-        Default = false,
-        Callback = function(value)
-         lel = value
-         workspace.ChildAdded:Connect(function(v)
-         if lel then
-          task.delay(.5, function()
-           kill(v)
-           end)
-          end
-         end)
-        end
-    })
-    KillingTab:AddButton(
+isfolder = isfolder or error("Filesystem error!")
+writefile = writefile or error "Filesystem error!"
+local rp = game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+local c = rp.Parent
+local bp = game:GetService("Players").LocalPlayer.Backpack
+local p = bp.Parent
+local humanoid = c.Humanoid
+
+if not isfolder("CraftHub") then
+    local set = {AlertOnErrors = true, Animations = false, WalkSpeed = 35}
+    local content = game:GetService("HttpService"):JSONEncode(set)
+    makefolder("CraftHub")
+    writefile("CraftHub/Settings.json", content)
+end
+task.wait(.15)
+local settings =
+    game:GetService("HttpService"):JSONDecode(
+    readfile("CraftHub/Settings.json")
+)
+local OrionLib = loadstring(game:HttpGet(("https://raw.githubusercontent.com/shlexware/Orion/main/source")))()
+local Window =
+    OrionLib:MakeWindow(
+    {
+        Name = "CraftHub",
+        HidePremium = false,
+        SaveConfig = false,
+        ConfigFolder = "OrionTest",
+        IntroText = "CraftHub || Eternal CraftWars Script"
+    }
+)
+function notify(message, title, time)
+    OrionLib:MakeNotification(
         {
-            Name = "Kill all mobs",
-            Callback = function()
-                for i, v in workspace:GetChildren() do
-                    if v:FindFirstChild("EnemyMain") then
-                        kill(v)
-                    end
-                end
-            end
+            Name = tostring(title),
+            Content = tostring(message),
+            Image = "rbxassetid://4483345998",
+            Time = tonumber(time)
         }
     )
-    p.CharacterAdded:Connect(function(char)
-    task.delay(.25, function()
-    humanoid = char:WaitForChild("Humanoid")
-    rp = char.HumanoidRootPart
-    humanoid.WalkSpeed = settings.WalkSpeed
-    bp = p.Backpack
-    c = char
-    end)
-    end)
-OrionLib:Init()
+end
+function kill(enemy)
+    if enemy:FindFirstChild("EnemyMain") then
+    humanoid:UnequipTools()
+    
+    for i, v in bp:GetChildren() do
+        if v.Name:lower():find("sword") and v:FindFirstChild("RemoteFunction") then
+            v.Parent = c
+            sword = v
+        end
+    end
+    rp.CFrame = enemy:FindFirstChildWhichIsA("Part").CFrame + Vector3.new(0, 25, 0)
+    local args = {
+        [1] = "hit",
+        [2] = {
+            [1] = enemy.Humanoid,
+            [2] = enemy.Humanoid.Health
+        }
+    }
+
+   if sword then sword.RemoteFunction:InvokeServer(unpack(args))
+   end
+  end
+end
+local MainTab =
+    Window:MakeTab(
+    {
+        Name = "Main",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
+    }
+)
+MainTab:AddParagraph('Note!', 'Make sure to have the item "Sword" in your backpack and any pickaxe.')
+MainTab:AddToggle({
+    Name = 'Auto kill mobs',
+    Default = false,
+    Callback = function(value)
+     lel = value
+     workspace.ChildAdded:Connect(function(v)
+     if lel then
+      task.delay(.5, function()
+       kill(v)
+       end)
+      end
+     end)
+    end
+})
+MainTab:AddButton(
+    {
+        Name = "Kill all mobs",
+        Callback = function()
+            for i, v in workspace:GetChildren() do
+                if v:FindFirstChild("EnemyMain") then
+                    kill(v)
+                end
+            end
+        end
+    }
+)
+p.CharacterAdded:Connect(function(char)
+task.delay(.25, function()
+humanoid = char:WaitForChild("Humanoid")
+rp = char.HumanoidRootPart
+humanoid.WalkSpeed = settings.WalkSpeed
+bp = p.Backpack
+c = char
+end)
+end)
