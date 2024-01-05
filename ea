@@ -66,16 +66,11 @@
     -- Toggles
 
 
-    VisTab:AddSlider({
-        Name = "Time Changer",
-        Min = 0,
-        Max = 23,
-        Default = 0,
-        Color = Color3.fromRGB(255,255,255),
-        Increment = 1,
-        ValueName = "Times",
+    VisTab:AddToggle({
+        Name = "NightTime",
+        Default = false,
         Callback = function(Value)
-            light.ClockTime = Value
+            light.ClockTime = 23
         end    
     })
 
