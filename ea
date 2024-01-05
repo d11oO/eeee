@@ -60,14 +60,7 @@ local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shle
     _G.NT = true
     -- Toggles
 
-    MainTab:AddToggle({
-        Name = "Night",
-        Default = false,
-        Callback = function(Value)
-            _G.NT = Value
-            Nt()
-        end   
-    })
+
 
 
     MainTab:AddToggle({
