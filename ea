@@ -30,6 +30,16 @@
             PremiumOnly = false
         }
     )
+
+    local VisTab =
+    Window:MakeTab(
+    {
+        Name = "Visuals",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
+    }
+)
+
     -- Script (function)
 
     function autotap()
@@ -46,14 +56,28 @@
         end
     end
 
+    
+
     -- Values
 
     _G.autotap = true
     _G.autoRebirth = true
+
     -- Toggles
 
 
-
+    VisTab:AddSlider({
+        Name = "Time Changer",
+        Min = 0,
+        Max = 20,
+        Default = 5,
+        Color = Color3.fromRGB(255,255,255),
+        Increment = 1,
+        ValueName = "Times",
+        Callback = function(Value)
+            light.ClockTime = Value
+        end    
+    })
 
     MainTab:AddToggle({
         Name = "Auto Click",
