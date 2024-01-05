@@ -37,7 +37,7 @@ if game.Placeid == 10764017846 then
        end
       end
     end
-    MainTab:AddToggle({
+    KillingTab:AddToggle({
         Name = 'Auto kill mobs',
         Default = false,
         Callback = function(value)
@@ -51,7 +51,7 @@ if game.Placeid == 10764017846 then
          end)
         end
     })
-    MainTab:AddButton(
+    KillingTab:AddButton(
         {
             Name = "Kill all mobs",
             Callback = function()
@@ -72,3 +72,4 @@ if game.Placeid == 10764017846 then
     c = char
     end)
     end)
+OrionLib:Init()
