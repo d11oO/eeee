@@ -70,7 +70,7 @@
         Name = "NightTime",
         Default = false,
         Callback = function(Value)
-            light.ClockTime = 23
+            game.lighting.ClockTime = 1
         end    
     })
 
@@ -91,3 +91,6 @@
             autoRebirth()
         end
     })
+
+
+
