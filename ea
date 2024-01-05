@@ -29,9 +29,6 @@ local OrionLib = loadstring(game:HttpGet(("https://raw.githubusercontent.com/shl
             PremiumOnly = false
         }
     )
-
-
-
     -- Script (function)
 
     function autotap()
@@ -48,15 +45,10 @@ local OrionLib = loadstring(game:HttpGet(("https://raw.githubusercontent.com/shl
         end
     end
 
-
-
-    
-
     -- Values
 
     _G.autotap = true
     _G.autoRebirth = true
-
     -- Toggles
 
 
@@ -79,6 +71,3 @@ local OrionLib = loadstring(game:HttpGet(("https://raw.githubusercontent.com/shl
             autoRebirth()
         end
     })
-
-
-
