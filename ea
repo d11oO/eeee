@@ -45,17 +45,25 @@ local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shle
         end
     end
 
+    function Nt()
+        while ._G.NT do
+            game.Lighting.Clocktime = 0
+        end
+    end
+
     -- Values
 
     _G.autotap = true
     _G.autoRebirth = true
+    _G.NT = true
     -- Toggles
 
     MainTab:AddToggle({
         Name = "Night",
         Default = false,
         Callback = function(Value)
-            game.Lighting.ClockTime = 0
+            _G.NT = Value
+            Nt()
         end   
     })
 
