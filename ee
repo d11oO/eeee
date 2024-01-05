@@ -1,4 +1,5 @@
-local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
+
+    local OrionLib = loadstring(game:HttpGet(("https://raw.githubusercontent.com/shlexware/Orion/main/source")))()
     local Window =
         OrionLib:MakeWindow(
         {
@@ -59,10 +60,10 @@ local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shle
 
     -- Toggles
 
-    Tab:AddToggle({
-        Name = "This is a toggle!",
+    MainTab:AddToggle({
+        Name = "Night",
         Default = false,
-        Callback = function(0)
+        Callback = function(Value)
             game.Lighting.ClockTime = 0
         end   
     })
