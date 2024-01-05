@@ -47,7 +47,9 @@ local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shle
 
     function Nt()
         while ._G.NT do
-            game.Lighting.Clocktime = 0
+            for i = 1, 2400 do
+                game.Lighting.ClockTime = i / 100
+                wait(0.1)
         end
     end
 
