@@ -71,7 +71,7 @@ local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shle
                 sword = v
             end
         end
-        rp.CFrame = enemy:FindFirstChildWhichIsA("Part").CFrame
+        rp.CFrame = enemy:FindFirstChildWhichIsA("Part").CFrame + Vector3.new(0, 0, 0)
         local args = {
             [1] = "hit",
             [2] = {
