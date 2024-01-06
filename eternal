@@ -49,7 +49,7 @@ local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shle
     end
 
     function murasama2()
-        while _G.murasama do
+        while _G.murasama2 do
             local args = {
                 [1] = 44860500,
                 [2] = 1
@@ -60,7 +60,7 @@ local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shle
     end
 
 function murasama3()
-        while _G.murasama do
+        while _G.murasama3 do
             local args = {
                 [1] = 44860500,
                 [2] = 1
