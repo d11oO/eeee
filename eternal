@@ -41,8 +41,21 @@ local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shle
             }
             game:GetService("Players").LocalPlayer.Character.Murasama.RemoteEvent:FireServer(unpack(args))
             wait(0.001)
+and
+            function getNil(name,class) for _,v in next, getnilinstances()do if v.ClassName==class and v.Name==name then return v;end end end
+
+local args = {
+    [1] = 44876500,
+    [2] = 1
+}
+
+getNil("Linhminh010712", "Model"):WaitForChild("Murasama"):WaitForChild("RemoteEvent"):FireServer(unpack(args))
+ wait(0.001)
+
         end   
     end
+end
+end
 
     function azure()
         while _G.azure do
