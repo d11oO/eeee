@@ -122,5 +122,11 @@ rp = char.HumanoidRootPart
 humanoid.WalkSpeed = settings.WalkSpeed
 bp = p.Backpack
 c = char
+
+local rp = game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+local c = rp.Parent
+local bp = game:GetService("Players").LocalPlayer.Backpack
+local p = bp.Parent
+local humanoid = c.Humanoid
 end)
 end)
