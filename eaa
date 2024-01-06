@@ -1,90 +1,106 @@
-isfolder = isfolder or error("Filesystem error!")
-writefile = writefile or error "Filesystem error!"
-local rp = game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-local c = rp.Parent
-local bp = game:GetService("Players").LocalPlayer.Backpack
-local p = bp.Parent
-local humanoid = c.Humanoid
-
-if not isfolder("CraftHub") then
-    local set = {AlertOnErrors = true, Animations = false, WalkSpeed = 35}
-    local content = game:GetService("HttpService"):JSONEncode(set)
-    makefolder("CraftHub")
-    writefile("CraftHub/Settings.json", content)
-end
-task.wait(.15)
-local settings =
-    game:GetService("HttpService"):JSONDecode(
-    readfile("CraftHub/Settings.json")
-)
-local OrionLib = loadstring(game:HttpGet(("https://raw.githubusercontent.com/shlexware/Orion/main/source")))()
-local Window =
-    OrionLib:MakeWindow(
-    {
-        Name = "CraftHub",
-        HidePremium = false,
-        SaveConfig = false,
-        ConfigFolder = "OrionTest",
-        IntroText = "CraftHub || Eternal CraftWars Script"
-    }
-)
-function notify(message, title, time)
-    OrionLib:MakeNotification(
+local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
+    local Window =
+        OrionLib:MakeWindow(
         {
-            Name = tostring(title),
-            Content = tostring(message),
-            Image = "rbxassetid://4483345998",
-            Time = tonumber(time)
+            Name = "Extral0",
+            HidePremium = false,
+            SaveConfig = false,
+            ConfigFolder = "OrionTest",
+            IntroText = "Extral0"
         }
     )
-end
-function kill(enemy)
-    if enemy:FindFirstChild("EnemyMain") then
-    humanoid:UnequipTools()
-    
-    for i, v in bp:GetChildren() do
-        if v.Name:lower():find("sword") and v:FindFirstChild("RemoteFunction") then
-            v.Parent = c
-            sword = v
-        end
+
+    function notify(message, title, time)
+        OrionLib:MakeNotification(
+            {
+                Name = tostring(title),
+                Content = tostring(message),
+                Image = "rbxassetid://4483345998",
+                Time = tonumber(time)
+            }
+        )
     end
-    rp.CFrame = enemy:FindFirstChildWhichIsA("Part")
-    local args = {
-        [1] = "hit",
-        [2] = {
-            [1] = enemy.Humanoid,
-            [2] = enemy.Humanoid.Health
+
+    local MainTab =
+        Window:MakeTab(
+        {
+            Name = "Auto",
+            Icon = "rbxassetid://4483345998",
+            PremiumOnly = false
         }
-    }
-
-   if sword then sword.RemoteFunction:InvokeServer(unpack(args))
-   end
-  end
-end
-local MainTab =
-    Window:MakeTab(
-    {
-        Name = "Main",
-        Icon = "rbxassetid://4483345998",
-        PremiumOnly = false
-    }
-)
-MainTab:AddParagraph('Note!', 'Make sure to have the item "Sword" in your backpack and any pickaxe.')
-
-MainTab:AddToggle({
-    Name = 'Auto kill mobs',
-    Default = false,
-    Callback = function(value)
-     lel = value
-     workspace.ChildAdded:Connect(function(v)
-     if lel then
-      task.delay(.5, function()
-       kill(v)
-       end)
-      end
-     end)
+    )
+    -- values
+    _G.kill = true
+    _G.murasama = true 
+    _G.azure = true
+    -- function
+    function murasama()
+        while _G.murasama do
+            local args = {
+                [1] = 44860500,
+                [2] = 1
+            }
+            game:GetService("Players").LocalPlayer.Character.Murasama.RemoteEvent:FireServer(unpack(args))
+            wait(0.001)
+        end   
     end
-})
+
+    function azure()
+        while _G.azure do
+            local args = {
+                [1] = "swing",
+                [2] = {
+                    [1] = 6,
+                    [2] = game:GetService("Players").LocalPlayer
+                },
+                [3] = 1
+            }
+
+            game:GetService("Players").LocalPlayer:WaitForChild("RemoteFunction"):InvokeServer(unpack(args))
+        wait(0.001)
+        end
+    end   
+    
+    function kill(enemy)
+        if enemy:FindFirstChild("EnemyMain") then
+        humanoid:UnequipTools()
+        
+        for i, v in bp:GetChildren() do
+            if v.Name:lower():find("sword") and v:FindFirstChild("RemoteFunction") then
+                v.Parent = c
+                sword = v
+            end
+        end
+        local args = {
+            [1] = "hit",
+            [2] = {
+                [1] = enemy.Humanoid,
+                [2] = enemy.Humanoid.Health
+            }
+        }
+    
+       if sword then sword.RemoteFunction:InvokeServer(unpack(args))
+       end
+      end
+    end
+
+    MainTab:AddToggle({
+        Name = "murasama glitch",
+        Default = false,
+        Callback = function(Value)
+            _G.murasama = Value
+            murasama()
+        end
+    })
+
+    MainTab:AddToggle({
+        Name = "azure inf dmg (maybe) glitch",
+        Default = false,
+        Callback = function(Value)
+            _G.azure = Value
+            azure()
+        end
+    })
 
 MainTab:AddButton(
     {
@@ -101,7 +117,6 @@ MainTab:AddButton(
 p.CharacterAdded:Connect(function(char)
 task.delay(.25, function()
 humanoid = char:WaitForChild("Humanoid")
-rp = char.HumanoidRootPart
 humanoid.WalkSpeed = settings.WalkSpeed
 bp = p.Backpack
 c = char
