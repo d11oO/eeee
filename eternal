@@ -62,25 +62,28 @@ local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shle
     end   
     
     function kill(enemy)
-        while _G.kill do
         if enemy:FindFirstChild("EnemyMain") then
-            humanoid:UnequipTools()
-            for i, v in bp:GetChildren() do
-                if v.Name:lower():find("sword") and v:FindFirstChild("RemoteFunction") then
-                    v.Parent = c
-                    sword = v
-                end
-            end
-            local args = {
-                [1] = "hit",
-                [2] = {
-                    [1] = enemy.Humanoid,
-                    [2] = enemy.Humanoid.Health
-                }
-            }
-            if sword then sword.RemoteFunction:InvokeServer(unpack(args))
+        humanoid:UnequipTools()
+        
+        for i, v in bp:GetChildren() do
+            if v.Name:lower():find("sword") and v:FindFirstChild("RemoteFunction") then
+                v.Parent = c
+                sword = v
             end
         end
+        rp.CFrame = enemy:FindFirstChildWhichIsA("Part").CFrame
+        local args = {
+            [1] = "hit",
+            [2] = {
+                [1] = enemy.Humanoid,
+                [2] = enemy.Humanoid.Health
+            }
+        }
+    
+       if sword then sword.RemoteFunction:InvokeServer(unpack(args))
+       end
+      end
+    end
 
     MainTab:AddToggle({
         Name = "murasama glitch",
@@ -100,11 +103,24 @@ local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shle
         end
     })
 
-    MainTab:AddToggle({
-        Name = "KAE",
-        Default - false,
-        Cakkback - function(Value)
-            _G.kill = Value
-            kill()
+MainTab:AddButton(
+    {
+        Name = "Kill all mobs",
+        Callback = function()
+            for i, v in workspace:GetChildren() do
+                if v:FindFirstChild("EnemyMain") then
+                    kill(v)
+                end
+            end
         end
-    })
+    }
+)
+p.CharacterAdded:Connect(function(char)
+task.delay(.25, function()
+humanoid = char:WaitForChild("Humanoid")
+rp = char.HumanoidRootPart
+humanoid.WalkSpeed = settings.WalkSpeed
+bp = p.Backpack
+c = char
+end)
+end)
