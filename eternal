@@ -32,9 +32,34 @@ local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shle
     -- values
     _G.kill = true
     _G.murasama = true 
+    _G.murasama2 = true
+    _G.murasama3 = true 
+ 
     _G.azure = true
     -- function
     function murasama()
+        while _G.murasama do
+            local args = {
+                [1] = 44860500,
+                [2] = 1
+            }
+            game:GetService("Players").LocalPlayer.Character.Murasama.RemoteEvent:FireServer(unpack(args))
+            wait(0.0000000000000000000000000000000000000000000000000000000000000000000000000000000001)
+        end   
+    end
+
+    function murasama2()
+        while _G.murasama do
+            local args = {
+                [1] = 44860500,
+                [2] = 1
+            }
+            game:GetService("Players").LocalPlayer.Character.Murasama.RemoteEvent:FireServer(unpack(args))
+            wait(0.0000000000000000000000000000000000000000000000000000000000000000000000000000000001)
+        end   
+    end
+
+function murasama3()
         while _G.murasama do
             local args = {
                 [1] = 44860500,
@@ -93,6 +118,27 @@ local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shle
             murasama()
         end
     })
+
+    MainTab:AddToggle({
+        Name = "murasama glitch",
+        Default = false,
+        Callback = function(Value)
+            _G.murasama2 = Value
+            murasama2()
+        end
+    })
+
+    MainTab:AddToggle({
+        Name = "murasama glitch",
+        Default = false,
+        Callback = function(Value)
+            _G.murasama3 = Value
+            murasama3()
+        end
+    })
+
+
+
 
     MainTab:AddToggle({
         Name = "azure inf dmg (maybe) glitch",
