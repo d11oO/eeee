@@ -71,18 +71,12 @@ local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shle
                 sword = v
             end
         end
-        local args = {
-            [1] = "hit",
-            [2] = {
-                [1] = enemy.Humanoid,
-                [2] = enemy.Humanoid.Health
-            }
-        }
+       
     
        if sword then sword.RemoteFunction:InvokeServer(unpack(args))
        end
       end
-    end
+   
 
     MainTab:AddToggle({
         Name = "murasama glitch",
