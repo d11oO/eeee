@@ -70,44 +70,7 @@ local MainTab =
     }
 )
 MainTab:AddParagraph('Note!', 'Make sure to have the item "Sword" in your backpack and any pickaxe.')
-MainTab:AddToggle({
-    Name = 'Auto mine ores',
-    Default = false,
-    Callback = function(va)
-    val = va workspace.SpawnedOres.ChildAdded:Connect(function(v)
-     task.delay(.35, function()
-        for i, v in c:GetChildren() do
-                if v.Name:lower():find("pickaxe") then
-                    pickaxe = v
-                end
-            end
-            if not pickaxe then
-                for i, v in bp:GetChildren() do
-                    if v.Name:lower():find("pickaxe") then
-                        pickaxe = v
-                        pickaxe.Parent = c
-                    end
-                end
-            end
-            task.wait(.25)
-            rp.CFrame = v:FindFirstChildWhichIsA("Part").CFrame
-                task.spawn(
-                    function()
-                        local args = {
-                            [1] = "hit",
-                            [2] = {
-                                [1] = v.Ore,
-                                [2] = v.Ore.Health
-                            }
-                        }
 
-                       if pickaxe then pickaxe.RemoteFunction:InvokeServer(unpack(args))
-                       end
-                      end)
-      end)
-     end)
-    end
-})
 MainTab:AddToggle({
     Name = 'Auto kill mobs',
     Default = false,
@@ -122,45 +85,7 @@ MainTab:AddToggle({
      end)
     end
 })
-MainTab:AddButton(
-    {
-        Name = "Mine all ores",
-        Callback = function()
-            for i, v in c:GetChildren() do
-                if v.Name:lower():find("pickaxe") then
-                    pickaxe = v
-                end
-            end
-            if not pickaxe then
-                for i, v in bp:GetChildren() do
-                    if v.Name:lower():find("pickaxe") then
-                        pickaxe = v
-                        pickaxe.Parent = c
-                    end
-                end
-            end
-            task.wait(.25)
-            for i, v in workspace.SpawnedOres:GetChildren() do
-                rp.CFrame = v:FindFirstChildWhichIsA("Part").CFrame
-                task.spawn(
-                    function()
-                        local args = {
-                            [1] = "hit",
-                            [2] = {
-                                [1] = v.Ore,
-                                [2] = v.Ore.Health
-                            }
-                        }
 
-                       if pickaxe then pickaxe.RemoteFunction:InvokeServer(unpack(args))
-                       end
-                        task.wait()
-                    end
-                )
-            end
-        end
-    }
-)
 MainTab:AddButton(
     {
         Name = "Kill all mobs",
