@@ -1,0 +1,80 @@
+local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
+    local Window =
+        OrionLib:MakeWindow(
+        {
+            Name = "Extral0",
+            HidePremium = false,
+            SaveConfig = false,
+            ConfigFolder = "OrionTest",
+            IntroText = "Extral0"
+        }
+    )
+
+    function notify(message, title, time)
+        OrionLib:MakeNotification(
+            {
+                Name = tostring(title),
+                Content = tostring(message),
+                Image = "rbxassetid://4483345998",
+                Time = tonumber(time)
+            }
+        )
+    end
+
+    local MainTab =
+        Window:MakeTab(
+        {
+            Name = "Auto",
+            Icon = "rbxassetid://4483345998",
+            PremiumOnly = false
+        }
+    )
+    -- values
+    _G.murasama = true 
+    _G.azure = true
+    -- function
+    function murasama()
+        while _G.murasama do
+            local args = {
+                [1] = 44860500,
+                [2] = 1
+            }
+            game:GetService("Players").LocalPlayer.Character.Murasama.RemoteEvent:FireServer(unpack(args))
+            wait(0.001)
+        end   
+    end
+
+    function azure()
+        while _G.azure do
+            local args = {
+                [1] = "swing",
+                [2] = {
+                    [1] = 6,
+                    [2] = game:GetService("Players").LocalPlayer
+                },
+                [3] = 1
+            }
+            
+            game:GetService("Players").LocalPlayer:WaitForChild("RemoteFunction"):InvokeServer(unpack(args))
+        wait(0.001)
+        end
+    end            
+    
+    MainTab:AddToggle({
+        Name = "murasama glitch",
+        Default = false,
+        Callback = function(Value)
+            _G.murasama = Value
+            murasama()
+        end
+    })
+
+    MainTab:AddToggle({
+        Name = "azure inf dmg (maybe) glitch",
+        Default = false,
+        Callback = function(Value)
+            _G.azure = Value
+            azure()
+        end
+    })
+    
