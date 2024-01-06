@@ -41,7 +41,7 @@ local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shle
                 [2] = 1
             }
             game:GetService("Players").LocalPlayer.Character.Murasama.RemoteEvent:FireServer(unpack(args))
-            wait(0.001)
+            wait(0.0000000000000000000000000000000000000000000000000000000000000000000000000000000001)
         end   
     end
 
