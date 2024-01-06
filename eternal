@@ -41,18 +41,6 @@ local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shle
             }
             game:GetService("Players").LocalPlayer.Character.Murasama.RemoteEvent:FireServer(unpack(args))
             wait(0.001)
-
-            function getNil(name,class) for _,v in next, getnilinstances()do if v.ClassName==class and v.Name==name then return v;end end end
-
-local args = {
-    [1] = 44876500,
-    [2] = 1
-}
-
-getNil("Linhminh010712", "Model"):WaitForChild("Murasama"):WaitForChild("RemoteEvent"):FireServer(unpack(args))
- wait(0.001)
-end
-
         end   
     end
 
@@ -66,12 +54,12 @@ end
                 },
                 [3] = 1
             }
-            
+
             game:GetService("Players").LocalPlayer:WaitForChild("RemoteFunction"):InvokeServer(unpack(args))
         wait(0.001)
         end
     end            
-    
+
     MainTab:AddToggle({
         Name = "murasama glitch",
         Default = false,
@@ -89,4 +77,3 @@ end
             azure()
         end
     })
-    
