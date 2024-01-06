@@ -30,6 +30,7 @@ local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shle
         }
     )
     -- values
+    _G.kill = true
     _G.murasama = true 
     _G.azure = true
     -- function
@@ -40,7 +41,7 @@ local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shle
                 [2] = 1
             }
             game:GetService("Players").LocalPlayer.Character.Murasama.RemoteEvent:FireServer(unpack(args))
-            wait(0.000000000000001)
+            wait(0.001)
         end   
     end
 
@@ -56,9 +57,30 @@ local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shle
             }
 
             game:GetService("Players").LocalPlayer:WaitForChild("RemoteFunction"):InvokeServer(unpack(args))
-        wait(0.000000001)
+        wait(0.001)
         end
-    end            
+    end   
+    
+    function kill(enemy)
+        while _G.kill do
+        if enemy:FindFirstChild("EnemyMain") then
+            humanoid:UnequipTools()
+            for i, v in bp:GetChildren() do
+                if v.Name:lower():find("sword") and v:FindFirstChild("RemoteFunction") then
+                    v.Parent = c
+                    sword = v
+                end
+            end
+            local args = {
+                [1] = "hit",
+                [2] = {
+                    [1] = enemy.Humanoid,
+                    [2] = enemy.Humanoid.Health
+                }
+            }
+            if sword then sword.RemoteFunction:InvokeServer(unpack(args))
+            end
+        end
 
     MainTab:AddToggle({
         Name = "murasama glitch",
@@ -75,5 +97,14 @@ local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shle
         Callback = function(Value)
             _G.azure = Value
             azure()
+        end
+    })
+
+    MainTab:AddToggle({
+        Name = "KAE",
+        Default - false,
+        Cakkback - function(Value)
+            _G.kill = Value
+            kill()
         end
     })
