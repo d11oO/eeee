@@ -48,7 +48,7 @@ function kill(enemy)
             sword = v
         end
     end
-    rp.CFrame = enemy:FindFirstChildWhichIsA("Part").CFrame + Vector3.new(0, 25, 0)
+    rp.CFrame = enemy:FindFirstChildWhichIsA("Part")
     local args = {
         [1] = "hit",
         [2] = {
